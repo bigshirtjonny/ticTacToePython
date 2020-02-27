@@ -1,0 +1,79 @@
+def checkIfWon(board):
+    if(board[0] == board[4] and board[4] == board[8] and board[0] != ' '):
+        return board[0]
+    elif(board[2] == board[4] and board[4] == board[6] and board[4] != ' '):
+        return board[4]
+    elif(board[0] == board[3] and board[3] == board[6] and board[0] != ' '):
+        return board[0]
+    elif(board[1] == board[4] and board[4] == board[7] and board[1] != ' '):
+        return board[1]
+    elif(board[2] == board[5] and board[5] == board[8] and board[5] != ' '):
+        return board[5]
+inp = input("Player 1: Do you want to be X or O: ")
+xOrO = inp.upper()
+if(xOrO == 'X'):
+    print('Player 2: You are O')
+    pl2 = 'O'
+elif (xOrO == 'O'):
+    print('Player 2: You are X')
+    pl2 = 'X'
+else:
+    print("Please restart the game!")
+print("Here is the starting board. To choose which box you want to go into, type in the number corresponding. The boxes are numbered from 1...9 from top left to bottom right")
+
+board = [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
+count = 0
+
+for x in range(3):
+    print(f' {board[0]}  |  {board[1]}  |  {board[2]} ')
+print('---------------')
+for x in range(3):
+    print(f' {board[3]}  |  {board[4]}  |  {board[5]} ')
+print('---------------')
+for x in range(3):
+    print(f' {board[6]}  |  {board[7]}  |  {board[8]} ')
+
+while(count < 9):
+
+    if(count % 2 == 0):
+        input1 = input('Player 1: Please enter your number: ')
+        ind = int(input1) - 1
+        if(board[ind] == ' '):
+            board[ind] = xOrO
+        else:
+            print("Already Taken, Try again")
+            continue
+    else:
+        input1 = input('Player 2: Please enter your number: ')
+        ind = int(input1) - 1
+        if(board[ind] == ' '):
+            board[ind] = pl2
+        else:
+            print("Already Taken, Try again")
+            continue
+
+    for x in range(3):
+        print(f' {board[0]}  |  {board[1]}  |  {board[2]} ')
+    print('---------------')
+    for x in range(3):
+        print(f' {board[3]}  |  {board[4]}  |  {board[5]} ')
+    print('---------------')
+    for x in range(3):
+        print(f' {board[6]}  |  {board[7]}  |  {board[8]} ')
+
+    count += 1
+    if(checkIfWon(board)=='X'):
+        if(pl2 == 'X'):
+            print("Player 2 you won!")
+            break
+        else:
+            print("Player 1 you won!")
+            break
+
+    if(checkIfWon(board)=='O'):
+        if(pl2 == 'O'):
+            print("Player 2 you won!")
+            break
+        else:
+            print("Player 1 you won!")
+            break
